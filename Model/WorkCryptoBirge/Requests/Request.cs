@@ -16,8 +16,16 @@ namespace Model.Requests
             using (var hmacsha256 = new HMACSHA256(keyByte))
             {
                 hmacsha256.ComputeHash(encoding.GetBytes(query));
-                return encoding.GetString(hmacsha256.Hash);
+                return ByteToString(hmacsha256.Hash);
             }
+        }
+
+        private string ByteToString(byte[] buff) 
+        {
+            string str = "";
+            for (int i = 0; i < buff.Length; i++)
+                str += buff[i].ToString("X2");
+            return str;
         }
 
         public async Task<string> webRequestAsync(string requestUrl, string method, string ApiKey)

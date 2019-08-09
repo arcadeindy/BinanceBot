@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <StackPanel DataContext="{Binding AccountInformation}">
+        <TextBlock Text="{Binding MakerCommission, UpdateSourceTrigger=PropertyChanged}"/>
+    </StackPanel>
 </Window>

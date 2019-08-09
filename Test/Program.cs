@@ -13,11 +13,20 @@ namespace Test
         static void Main(string[] args)
         {
             BinanceAPI api = new BinanceAPI(SettingsAPI.baseUrl);
-            //var result = api.GetOrderBookAsync("ETHBTC", 50);
+            //var result = api.GetOrderBook("ETHBTC", 50);
 
-            WaveTheory wave = new WaveTheory();
-            var result = wave.Find(api.GetCandleStick("ETHBTC", "1h", TimeExtension.StartTime("6.07.2019 9:00"), TimeExtension.EndTime()));
+            //WaveTheory wave = new WaveTheory();
+            // var result = wave.Find(api.GetCandleStick("ETHBTC", "1h", TimeExtension.StartTime("6.07.2019 9:00"), TimeExtension.EndTime()));
 
+            var res = api.GetAccountInformationAsync();
+            var res2 = api.GetCandleStickAsync("ETHBTC", "1h", TimeExtension.StartTime("6.07.2019 9:00"), TimeExtension.EndTime());
+            var res3 = api.GetMyTradesAsync("ETHBTC");
+            var res4 = api.GetOpenOrdersAsync("ETHBTC");
+            var res6 = api.GetOrderBookAsync("ETHBTC", 500);
+
+            Console.WriteLine("Завершился метод Main");
+
+            Console.ReadKey();
         }
 
     }

@@ -60,6 +60,8 @@ namespace Model.API
 
             var response = request.webRequest(apiRequestUrl, "GET", SettingsAPI.ApiKey);
 
+            System.Console.WriteLine("GetAccountInformation");
+
             var parsedResponse = JsonConvert.DeserializeObject<AccountInformation>(response);
             return parsedResponse;
         }
@@ -77,12 +79,10 @@ namespace Model.API
 
             string query = $"symbol={symbol}&interval={interval}&limit={limit}";
 
-            var signature = request.getSignature(SettingsAPI.SecretKey, query);
-
             apiRequestUrl += "?" + query;
 
             string response = request.webRequest(apiRequestUrl, "GET", SettingsAPI.ApiKey);
-
+            System.Console.WriteLine("GetCandleStick");
             CandlestickSerializer candlestick = new CandlestickSerializer(symbol, interval);
             return candlestick.DeserializeMany(response);
         }
@@ -101,12 +101,10 @@ namespace Model.API
 
             string query = $"symbol={symbol}&interval={interval}&startTime={startTime}&endTime={endTime}";
 
-            var signature = request.getSignature(SettingsAPI.SecretKey, query);
-
             apiRequestUrl += "?" + query;
 
             string response = request.webRequest(apiRequestUrl, "GET", SettingsAPI.ApiKey);
-
+            System.Console.WriteLine("GetCandleStick");
             return new CandlestickSerializer(symbol, interval).DeserializeMany(response);
         }
 
@@ -137,7 +135,7 @@ namespace Model.API
             string response = request.webRequest(apiRequestUrl, "GET", SettingsAPI.ApiKey);
 
             OrderBookSerializer orderSerializer = new OrderBookSerializer();
-
+            System.Console.WriteLine("GetOrderBook");
             return orderSerializer.Deserialize(response);
         }
 
@@ -160,6 +158,7 @@ namespace Model.API
             apiRequestUrl += "?" + query;
 
             var response = request.webRequest(apiRequestUrl, "GET", SettingsAPI.ApiKey);
+            System.Console.WriteLine("GetMyTrades");
             var parsedResponse = JsonConvert.DeserializeObject<Trades[]>(response);
             return parsedResponse;
         }
@@ -184,6 +183,7 @@ namespace Model.API
             apiRequestUrl += "?" + query;
 
             var response = request.webRequest(apiRequestUrl, "GET", SettingsAPI.ApiKey);
+            System.Console.WriteLine("GetOpenOrders");
             var parsedResponse = JsonConvert.DeserializeObject<Order[]>(response);
             return parsedResponse;
         }
