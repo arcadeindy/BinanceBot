@@ -30,5 +30,6 @@ namespace TradingBot.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+
     }
 }
