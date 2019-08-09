@@ -8,5 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <StackPanel DataContext="{Binding AccountInformation}">
         <TextBlock Text="{Binding MakerCommission, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="{Binding MakerCommission, UpdateSourceTrigger=PropertyChanged}"/>
     </StackPanel>
 </Window>
