@@ -10,7 +10,7 @@ namespace Test
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             BinanceAPI api = new BinanceAPI(SettingsAPI.baseUrl);
             //var result = api.GetOrderBook("ETHBTC", 50);

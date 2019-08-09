@@ -18,7 +18,7 @@ namespace ViewModel
 
         public AccountInformation AccountInformation
         {
-            get { return api.GetAccountInformation(); }
+            get { return accountInformation; }
             set
             {
                 accountInformation = value;
