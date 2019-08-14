@@ -1,9 +1,6 @@
 ﻿using Model.API;
-using Model.CandelModels;
 using Model.Extension;
-using Model.Models;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Test
