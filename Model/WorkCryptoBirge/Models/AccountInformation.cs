@@ -6,9 +6,9 @@ namespace TradingBot.Models
 {
     public class AccountInformation : INotifyPropertyChanged
     {
-        private double makerCommission;
+        private decimal makerCommission;
 
-        public double MakerCommission
+        public decimal MakerCommission
         {
             get { return makerCommission; }
             set
@@ -17,9 +17,9 @@ namespace TradingBot.Models
                 OnPropertyChanged("MakerCommission");
             }
         }
-        public double TakerCommission { get; set; }
-        public double BuyerCommission { get; set; }
-        public double SellerCommission { get; set; }
+        public decimal TakerCommission { get; set; }
+        public decimal BuyerCommission { get; set; }
+        public decimal SellerCommission { get; set; }
         public bool CanTrade { get; set; }
         public bool CanWithdraw { get; set; }
         public bool CanDeposit { get; set; }

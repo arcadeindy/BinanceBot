@@ -3,6 +3,7 @@ using Model.Extension;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using TradingBot.Models;
 
 namespace Test
 {
@@ -17,11 +18,13 @@ namespace Test
             // var result = wave.Find(api.GetCandleStick("ETHBTC", "1h", TimeExtension.StartTime("6.07.2019 9:00"), TimeExtension.EndTime()));
 
 
-            var res = api.GetTickerPrice();
+            //var res = api.GetTickerPrice();
 
-            var symbols = (from x in res
-                           where x.PriceChangePercent >= 10 || x.PriceChangePercent <= -10
-                           select x.Symbol).ToList();
+            // var symbols = (from x in res where x.PriceChangePercent >= 10 || x.PriceChangePercent <= -10 select x.Symbol).ToList();
+
+            var result = api.OrderOCO("ETHBTC", OrderSides.BUY, 0.02m, 0.017m, 0.0172m);
+
+  
 
             //var res = api.GetAccountInformation();
             //var res2 = api.GetCandleStickAsync("ETHBTC", "1h", TimeExtension.StartTime("6.07.2019 9:00"), TimeExtension.EndTime());

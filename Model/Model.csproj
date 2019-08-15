@@ -54,10 +54,12 @@
     <Compile Include="WorkCryptoBirge\Models\AssetBalance.cs" />
     <Compile Include="WorkCryptoBirge\Models\Candlestick.cs" />
     <Compile Include="WorkCryptoBirge\Models\Enum.cs" />
+    <Compile Include="WorkCryptoBirge\Models\OpenOrderList.cs" />
     <Compile Include="WorkCryptoBirge\Models\Order.cs" />
     <Compile Include="WorkCryptoBirge\Models\OrderBook.cs" />
     <Compile Include="WorkCryptoBirge\Models\OrderBookJsonConverter.cs" />
     <Compile Include="WorkCryptoBirge\Models\OrderBookPriceLevel.cs" />
+    <Compile Include="WorkCryptoBirge\Models\OrderOCO.cs" />
     <Compile Include="WorkCryptoBirge\Models\ServerTime.cs" />
     <Compile Include="WorkCryptoBirge\Models\TickerPrice.cs" />
     <Compile Include="WorkCryptoBirge\Models\TradeList.cs" />

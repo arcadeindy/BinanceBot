@@ -196,14 +196,11 @@ namespace Model.API
         /// <param name="side">Order side, Buy or Sell</param>
         /// <param name="quantity">Amount to be traded</param>
         /// <returns></returns>
-        public Order PlaceMarketOrder(string symbol, OrderSides side, double quantity)
+        public Order PlaceMarketOrder(string symbol, OrderSides side, decimal quantity)
         {
-            string newQuantity = quantity.ToString();
-            newQuantity = newQuantity.Replace(',', '.');
-
             string apiRequestUrl = $"{baseUrl}v3/order";
 
-            string query = $"symbol={symbol}&side={side}&type={OrderTypes.MARKET}&quantity={newQuantity}";
+            string query = $"symbol={symbol}&side={side}&type={OrderTypes.MARKET}&quantity={quantity}";
 
             query = $"{query}&timestamp={TimeExtension.getTimeStamp()}";
 
@@ -227,17 +224,11 @@ namespace Model.API
         /// <param name="quantity">Amount to be traded</param>
         /// <param name="price">Price to be bought/sold at</param>
         /// <returns>The order object</returns>
-        public Order PlaceOrder(string symbol, OrderSides side, OrderTypes type, TimesInForce timeInForce, double quantity, double price)
+        public Order PlaceOrder(string symbol, OrderSides side, OrderTypes type, TimesInForce timeInForce, decimal quantity, decimal price)
         {
-            string newPrice = price.ToString();
-            newPrice = newPrice.Replace(',', '.');
-
-            string newQuantity = quantity.ToString();
-            newQuantity = newQuantity.Replace(',', '.');
-
             string apiRequestUrl = $"{baseUrl}v3/order";
 
-            string query = $"symbol={symbol}&side={side}&type={type}&timeInForce={timeInForce}&quantity={newQuantity}&price={newPrice}";
+            string query = $"symbol={symbol}&side={side}&type={type}&timeInForce={timeInForce}&quantity={quantity}&price={price}";
 
             query = $"{query}&timestamp={TimeExtension.getTimeStamp()}";
 
@@ -257,6 +248,44 @@ namespace Model.API
             string response = request.webRequest(apiRequestUrl, "GET", SettingsAPI.ApiKey);
 
             return JsonConvert.DeserializeObject<TickerPrice[]>(response);
+        }
+
+        public OpenOrderList[] GetOpenOrderList()
+        {
+            string apiRequestUrl = $"{baseUrl}v3/openOrderList";
+
+            string query = $"timestamp={TimeExtension.getTimeStamp()}";
+
+            var signature = request.getSignature(SettingsAPI.SecretKey, query);
+            query += "&signature=" + signature;
+
+            apiRequestUrl += "?" + query;
+            var response = request.webRequest(apiRequestUrl, "GET", SettingsAPI.ApiKey);
+
+            var parsedResponse = JsonConvert.DeserializeObject<OpenOrderList[]>(response);
+            return parsedResponse;
+        }
+
+        public OrderOCO OrderOCO(string symbol, OrderSides side, decimal quantity, decimal price, decimal stopPrice)
+        {
+            string newQuantity = quantity.ToString().Replace(',', '.');
+            string newPrice = price.ToString().Replace(',', '.');
+            string newstopPrice = stopPrice.ToString().Replace(',', '.');
+
+            string apiRequestUrl = $"{baseUrl}v3/order/oco";
+
+            string query = $"symbol={symbol}&side={side}&quantity={newQuantity}&price={newPrice}&stopPrice={newstopPrice}";
+
+            query = $"{query}&timestamp={TimeExtension.getTimeStamp()}";
+
+            var signature = request.getSignature(SettingsAPI.SecretKey, query);
+            query += "&signature=" + signature;
+
+            apiRequestUrl += "?" + query;
+            var response = request.webRequest(apiRequestUrl, "POST", SettingsAPI.ApiKey);
+
+            var parsedResponse = JsonConvert.DeserializeObject<OrderOCO>(response);
+            return parsedResponse;
         }
 
         #endregion
@@ -292,12 +321,12 @@ namespace Model.API
             return await Task.Run(() => GetCandleStick(symbol, interval, startTime, endTime));
         }
 
-        public async Task<Order> PlaceOrderAsync(string symbol, OrderSides side, OrderTypes type, TimesInForce timeInForce, double quantity, double price)
+        public async Task<Order> PlaceOrderAsync(string symbol, OrderSides side, OrderTypes type, TimesInForce timeInForce, decimal quantity, decimal price)
         {
             return await Task.Run(() => PlaceOrder(symbol, side, type, timeInForce, quantity, price));
         }
 
-        public async Task<Order> PlaceMarketOrderAsync(string symbol, OrderSides side, double quantity)
+        public async Task<Order> PlaceMarketOrderAsync(string symbol, OrderSides side, decimal quantity)
         {
             return await Task.Run(() => PlaceMarketOrder(symbol, side, quantity));
         }
@@ -315,6 +344,16 @@ namespace Model.API
         public async Task<TickerPrice[]> GetTickerPriceAsync()
         {
             return await Task.Run(() => GetTickerPrice());
+        }
+
+        public async Task<OpenOrderList[]> GetOpenOrderListAsync()
+        {
+            return await Task.Run(() => GetOpenOrderList());
+        }
+
+        public async Task<OrderOCO> OrderOCOAsync(string symbol, OrderSides side, decimal quantity, decimal price, decimal stopPrice)
+        {
+            return await Task.Run(() => OrderOCO(symbol, side, quantity, price, stopPrice));
         }
 
         #endregion

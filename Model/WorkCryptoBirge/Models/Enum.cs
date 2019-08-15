@@ -31,4 +31,23 @@
 		IOC,
 		FOK
 	}
+
+    public enum ListOrderStatus
+    {
+        EXECUTING,
+        ALL_DONE,
+        REJECT
+    }
+
+    public enum ListStatusType
+    {
+        RESPONSE,
+        EXEC_STARTED,
+        ALL_DONE
+    }
+
+    public enum ContingencyType
+    {
+        OCO
+    }
 }

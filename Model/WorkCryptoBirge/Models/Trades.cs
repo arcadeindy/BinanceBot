@@ -4,8 +4,8 @@
     {
         public long Id { get; set; }
         public long OrderId { get; set; }
-        public double Price { get; set; }
-        public double Qty { get; set; }
+        public decimal Price { get; set; }
+        public decimal Qty { get; set; }
         public string Commission { get; set; }
         public string commissionAsset { get; set; }
         public long Time { get; set; }

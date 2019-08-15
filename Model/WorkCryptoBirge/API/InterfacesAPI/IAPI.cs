@@ -8,6 +8,8 @@ namespace Model.API
 {
     public interface IAPI
     {
+        OpenOrderList[] GetOpenOrderList();
+        Task<OpenOrderList[]> GetOpenOrderListAsync();
         TickerPrice[] GetTickerPrice();
         Task<TickerPrice[]> GetTickerPriceAsync();
         OrderBook GetOrderBook(string symbol, int limit);
@@ -24,10 +26,12 @@ namespace Model.API
         Task<IEnumerable<Candlestick>> GetCandleStickAsync(string symbol, string interval, int limit = 100);
         IEnumerable<Candlestick> GetCandleStick(string symbol, string interval, long startTime, long endTime);
         Task<IEnumerable<Candlestick>> GetCandleStickAsync(string symbol, string interval, long startTime, long endTime);
-        Order PlaceOrder(string symbol, OrderSides side, OrderTypes type, TimesInForce timeInForce, double quantity, double price);
-        Task<Order> PlaceOrderAsync(string symbol, OrderSides side, OrderTypes type, TimesInForce timeInForce, double quantity, double price);
-        Order PlaceMarketOrder(string symbol, OrderSides side, double quantity);
-        Task<Order> PlaceMarketOrderAsync(string symbol, OrderSides side, double quantity);
+        Order PlaceOrder(string symbol, OrderSides side, OrderTypes type, TimesInForce timeInForce, decimal quantity, decimal price);
+        Task<Order> PlaceOrderAsync(string symbol, OrderSides side, OrderTypes type, TimesInForce timeInForce, decimal quantity, decimal price);
+        Order PlaceMarketOrder(string symbol, OrderSides side, decimal quantity);
+        Task<Order> PlaceMarketOrderAsync(string symbol, OrderSides side, decimal quantity);
+        OrderOCO OrderOCO(string symbol, OrderSides side, decimal quantity, decimal price, decimal stopPrice);
+        Task<OrderOCO> OrderOCOAsync(string symbol, OrderSides side, decimal quantity, decimal price, decimal stopPrice);
         void CancelOrder(string symbol, long orderId);
         Task CancelOrderAsync(string symbol, long orderId);
     }
