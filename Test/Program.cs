@@ -19,7 +19,9 @@ namespace Test
 
             var res = api.GetTickerPrice();
 
-            var symbols = res.Where(x => x.PriceChangePercent >= 10 || x.PriceChangePercent <= -10).ToList();
+            var symbols = (from x in res
+                           where x.PriceChangePercent >= 10 || x.PriceChangePercent <= -10
+                           select x.Symbol).ToList();
 
             //var res = api.GetAccountInformation();
             //var res2 = api.GetCandleStickAsync("ETHBTC", "1h", TimeExtension.StartTime("6.07.2019 9:00"), TimeExtension.EndTime());
