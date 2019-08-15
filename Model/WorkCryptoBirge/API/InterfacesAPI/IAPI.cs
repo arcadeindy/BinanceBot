@@ -1,4 +1,5 @@
 ﻿using Model.Models;
+using Model.WorkCryptoBirge.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TradingBot.Models;
@@ -7,6 +8,8 @@ namespace Model.API
 {
     public interface IAPI
     {
+        TickerPrice[] GetTickerPrice();
+        Task<TickerPrice[]> GetTickerPriceAsync();
         OrderBook GetOrderBook(string symbol, int limit);
         Task<OrderBook> GetOrderBookAsync(string symbol, int limit);
         AccountInformation GetAccountInformation();

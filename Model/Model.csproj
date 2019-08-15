@@ -59,8 +59,7 @@
     <Compile Include="WorkCryptoBirge\Models\OrderBookJsonConverter.cs" />
     <Compile Include="WorkCryptoBirge\Models\OrderBookPriceLevel.cs" />
     <Compile Include="WorkCryptoBirge\Models\ServerTime.cs" />
-    <Compile Include="WorkCryptoBirge\Models\SymbolPrice.cs" />
-    <Compile Include="WorkCryptoBirge\Models\SymbolTicker.cs" />
+    <Compile Include="WorkCryptoBirge\Models\TickerPrice.cs" />
     <Compile Include="WorkCryptoBirge\Models\TradeList.cs" />
     <Compile Include="WorkCryptoBirge\Models\Trades.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

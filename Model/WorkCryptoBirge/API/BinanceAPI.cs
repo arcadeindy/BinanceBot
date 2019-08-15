@@ -2,6 +2,7 @@
 using Model.Models;
 using Model.Requests;
 using Model.Serilization;
+using Model.WorkCryptoBirge.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -250,6 +251,14 @@ namespace Model.API
             return parsedResponse;
         }
 
+        public TickerPrice[] GetTickerPrice()
+        {
+            string apiRequestUrl = $"{baseUrl}v1/ticker/24hr";
+            string response = request.webRequest(apiRequestUrl, "GET", SettingsAPI.ApiKey);
+
+            return JsonConvert.DeserializeObject<TickerPrice[]>(response);
+        }
+
         #endregion
 
         #region asynchronous methods
@@ -301,6 +310,11 @@ namespace Model.API
         public async Task<OrderBook> GetOrderBookAsync(string symbol, int limit)
         {
             return await Task.Run(() => GetOrderBook(symbol, limit));
+        }
+
+        public async Task<TickerPrice[]> GetTickerPriceAsync()
+        {
+            return await Task.Run(() => GetTickerPrice());
         }
 
         #endregion
